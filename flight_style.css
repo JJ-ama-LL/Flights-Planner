@@ -243,6 +243,8 @@ footer{
   height: 92px;
   background: #325091;
   color : white;
+  position: relative;
+  bottom: 0;
 }
 
 footer ul{
