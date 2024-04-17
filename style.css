@@ -298,6 +298,8 @@ footer{
   height: 92px;
   background: #325091;
   color : white;
+  position: absolute;
+  bottom: 0;
 }
 
 @media (max-width: 600px) {
