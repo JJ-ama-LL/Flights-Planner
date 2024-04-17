@@ -2,7 +2,7 @@
 const options = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': '2ebd13ef61msha3494a7c5d3f68ap1a1d3fjsnb54b14619dd3',
+    'X-RapidAPI-Key': '02fb637fc0msh04d73212aa82aa4p19b291jsn1e80c061a8f2',
     'X-RapidAPI-Host': 'sky-scanner3.p.rapidapi.com'
   }
 };

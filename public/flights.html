@@ -54,27 +54,27 @@
                         <label for="origin">Origin City:</label>
                         <input type="text" id="origin" class="origin" name="origin" required autocomplete="off">
                         <div class="autocomplete-dropdown" id="origin-dropdown"></div>
-                        <label for="destination">Destination City:</label>
+                        <label for="destination" style="padding-left: 40px;">Destination City:</label>
                         <input type="text" id="destination" class="departure" name="departure" required autocomplete="off">
                         <div class="autocomplete-dropdown" id="destination-dropdown"></div>
                     </div>                    
-                </div>
+                </div><br>
 
                 <label for="departure-date">Departure Date:</label>
                 <input type="date" id="departure-date" name="departure-date" value="2024-04-12" required>
 
-                <label for="return-date">Return Date:</label>
+                <label for="return-date" style="padding-left: 50px;">Return Date:</label>
                 <input type="date" id="return-date" name="return-date" value="2024-04-19" required>
 
                 
                
-                <label for="ticket">Ticket Type:</label>
+                <label for="ticket" style="padding-left: 50px;">Ticket Type:</label>
                 <select id="ticket-type" required>
                     <option value="economy">Economy</option>
                     <option value="premium_economy">Premium Economy</option>
                     <option value="business">Business</option>
                     <option value="first">First Class</option>
-                </select>
+                </select><br><br>
 
                 <button type="button" onclick="getFlights()">Search</button>
             </form>
@@ -83,19 +83,18 @@
         <section class="results-section">
             <div id="flight-results">
               <h2>Search Results</h2>
-
-              <label for="sort">Sort By</label>
-              <select id="sort_byPrice">
-                <option>Cheapest to Most Expensive</option>
-                <option>Most Expensive to Cheapest</option>
-              </select>
-
+              
               <table>
                 <thead>
                   <th>Flight</th>
                   <th>Departure Date (yyyy-mm-dd)</th>
                   <th>Flight Duration in Minutes</th>
-                  <th>Total Price</th>
+                  <th>Total Price <br>
+                    <select id="sort_byPrice">
+                      <option>Cheap to Expensive</option>
+                      <option>Expensive to Cheap</option>
+                    </select>
+                  </th>
                 </thead>
                 <tbody id="flight-rows">
                 </tbody>
