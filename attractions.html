@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Attractions Search</h1>
+        <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="flights.html">Flights</a></li>
+              <li><a href="hotels.html">Hotels</a></li>
+              <li><a href="restaurants.html">Restaurants</a></li>
+              <li><a href="attractions.html">Landmarks</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Find Attractions</h2>
+            <form id="attractions-search-form">
+                <label for="location">Current Location:</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="max-distance">Maximum Distance (miles):</label>
+                <input type="number" id="max-distance" name="max-distance" min="0" placeholder="Leave blank for any distance">
+
+                <label for="entry-price">Maximum Entry Price:</label>
+                <input type="number" id="entry-price" name="entry-price" min="0" placeholder="Leave blank for any price">
+
+                <label for="popularity">Minimum Popularity (out of 10):</label>
+                <input type="number" id="popularity" name="popularity" min="0" max="10" placeholder="Leave blank for any popularity">
+
+                <button type="submit">Search</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Cookie Bytes. All rights reserved.</p>
+    </footer>
+</body>
+</html>

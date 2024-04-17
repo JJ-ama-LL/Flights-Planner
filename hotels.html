@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hotel Search</h1>
+        <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="flights.html">Flights</a></li>
+              <li><a href="hotels.html">Hotels</a></li>
+              <li><a href="restaurants.html">Restaurants</a></li>
+              <li><a href="attractions.html">Landmarks</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Find Hotels</h2>
+            <form id="hotel-search-form">
+                <label for="hotel-name">Hotel Name:</label>
+                <input type="text" id="hotel-name" name="hotel-name" required>
+
+                <label for="check-in-date">Check-In Date:</label>
+                <input type="date" id="check-in-date" name="check-in-date" required>
+
+                <label for="check-out-date">Check-Out Date:</label>
+                <input type="date" id="check-out-date" name="check-out-date" required>
+
+                <label for="rooms">Number of Rooms:</label>
+                <select id="rooms" name="rooms" required>
+                    <option value="1">1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                   
+                </select>
+
+                <label for="persons-per-room">Persons per Room:</label>
+                <select id="persons-per-room" name="persons-per-room" required>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 Persons</option>
+                    <option value="3">3 Persons</option>
+                    
+                </select>
+
+                <label for="star-rating">Star Rating:</label>
+                <select id="star-rating" name="star-rating">
+                    <option value="">Any</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+
+                <label for="price-range">Price Range:</label>
+                <input type="number" id="price-min" name="price-min" placeholder="Min">
+                <span>-</span>
+                <input type="number" id="price-max" name="price-max" placeholder="Max">
+
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="hotel-results">
+            <h2>Search Results</h2>
+            <table id="hotel-results-table">
+                <thead>
+                    <tr>
+                        <th>Hotel Name</th>
+                        <th>Star Rating</th>
+                        <th>Price</th>
+                        <th>Free Rooms</th>
+                      
+                    </tr>
+                </thead>
+                <tbody id="hotel-results-body">
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Cookie Bytes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('hotel-search-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                searchHotels();
+            });
+
+
+            function displayHotelResults(data) {
+                const tableBody = document.getElementById('hotel-results-body');
+                tableBody.innerHTML = ''; 
+
+                data.forEach(hotel => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${hotel.name}</td>
+                        <td>${hotel.starRating}</td>
+                        <td>${hotel.price}</td>
+                        <td>${hotel.freeRooms}</td>
+                        <!-- Add more columns as needed -->
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

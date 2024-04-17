@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Search</title>
+    <link rel="stylesheet" href="flight_style.css">
+    <style>
+.autocomplete-dropdown {
+    position: absolute;
+    width: 100%; /* Adjusted to take full width of the input field */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    display: none;
+    z-index: 999; /* Increased z-index to ensure it appears above other elements */
+    cursor: pointer; /* Added cursor style to indicate clickable */
+}
+
+.autocomplete-dropdown div {
+    padding: 8px;
+}
+
+.autocomplete-dropdown div:hover {
+    background-color: #f2f2f2;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Travel Hub</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="flights.html">Flights</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="attractions.html">Landmarks</a></li>
+            </ul>
+                 </nav>
+    </header>
+
+    <main>
+      <h1> Flights</h1>
+        <div id="plane_section">
+            <img src="images/plane.PNG">
+        </div>
+      
+        <section class="search-section">
+            <h2>Find Flights</h2>
+            <form id="flight-search-form">
+                <div id="destinations">
+                    <div class="destination">
+                        <label for="origin">Origin City:</label>
+                        <input type="text" id="origin" class="origin" name="origin" required autocomplete="off">
+                        <div class="autocomplete-dropdown" id="origin-dropdown"></div>
+                        <label for="destination">Destination City:</label>
+                        <input type="text" id="destination" class="departure" name="departure" required autocomplete="off">
+                        <div class="autocomplete-dropdown" id="destination-dropdown"></div>
+                    </div>                    
+                </div>
+
+                <label for="departure-date">Departure Date:</label>
+                <input type="date" id="departure-date" name="departure-date" value="2024-04-12" required>
+
+                <label for="return-date">Return Date:</label>
+                <input type="date" id="return-date" name="return-date" value="2024-04-19" required>
+
+                
+               
+                <label for="ticket">Ticket Type:</label>
+                <select id="ticket-type" required>
+                    <option value="economy">Economy</option>
+                    <option value="premium_economy">Premium Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+
+                <button type="button" onclick="getFlights()">Search</button>
+            </form>
+        </section>
+
+        <section class="results-section">
+            <div id="flight-results">
+              <h2>Search Results</h2>
+
+              <table>
+                <thead>
+                  <th>Flight</th>
+                  <th>Departure Date (yyyy-mm-dd)</th>
+                  <th>Flight Duration in Minutes</th>
+                  <th>Total Price</th>
+                </thead>
+                <tbody id="flight-rows">
+                </tbody>
+              </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li class="vl"> </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <hr>
+        <p>&copy; Cookie Bytes. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+
+        function setDefaultDepartureDate() {
+          const today = new Date();
+          const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+          const year = tomorrow.getFullYear();
+          let month = tomorrow.getMonth() + 1; // January is 0!
+          let day = tomorrow.getDate();
+        
+          if (month < 10) {
+            month = "0" + month;
+          }
+      
+          if (day < 10) {
+            day = "0" + day;
+          }
+      
+          const formattedDate = year + "-" + month + "-" + day;
+          document.getElementById("departure-date").value = formattedDate;
+          document.getElementById("return-date").value = formattedDate;
+        }
+        
+        window.onload = setDefaultDepartureDate;
+
+        const originInput = document.getElementById('origin');
+        const destinationInput = document.getElementById('destination');
+    
+        autocomplete(originInput);
+        autocomplete(destinationInput);
+    </script>
+    
+</body>
+</html>

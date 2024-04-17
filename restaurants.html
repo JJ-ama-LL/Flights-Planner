@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Restaurant Search</h1>
+        <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="flights.html">Flights</a></li>
+              <li><a href="hotels.html">Hotels</a></li>
+              <li><a href="restaurants.html">Restaurants</a></li>
+              <li><a href="attractions.html">Landmarks</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <h2>Find Restaurants</h2>
+            <form id="restaurant-search-form">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="Enter location">
+
+                <button type="button" id="get-location">Get Current Location</button>
+
+                <label for="cuisine">Cuisine:</label>
+                <select id="cuisine" name="cuisine">
+                    <option value="">Any Cuisine</option>
+                </select>
+
+                <label for="star-rating">Star Rating:</label>
+                <select id="star-rating" name="star-rating">
+                    <option value="">Any Rating</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+
+                <label for="price-range">Price Range:</label>
+                <select id="price-range" name="price-range">
+                    <option value="">Any Price</option>
+                    <option value="0-10">$0 - $10</option>
+                    <option value="11-30">$11 - $30</option>
+                    <option value="31-50">$31 - $50</option>
+                    <option value="51-100">$51 - $100</option>
+                    <option value="101-200">$101 - $200</option>
+                </select>
+
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section class="restaurant-results">
+            <h2>Search Results</h2>
+            <table id="restaurant-results-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Star Rating</th>
+                        <th>Price Range</th>
+                        <th>Reviews</th>
+                    </tr>
+                </thead>
+                <tbody id="restaurant-results-body">
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Cookie Bytes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('get-location').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var locationInput = document.getElementById('location');
+                    locationInput.value = latitude + ',' + longitude;
+                }, function(error) {
+                    console.error('Error getting current location:', error);
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        });
+
+        document.getElementById('restaurant-search-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            searchRestaurants();
+        });
+
+
+
+        function displayRestaurantResults(data) {
+            const tableBody = document.getElementById('restaurant-results-body');
+            tableBody.innerHTML = ''; 
+
+            data.forEach(restaurant => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${restaurant.name}</td>
+                    <td>${restaurant.address}</td>
+                    <td>${restaurant.starRating}</td>
+                    <td>${restaurant.priceRange}</td>
+                    <td>${restaurant.reviews}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Populate cuisine options from API
+
+    </script>
+</body>
+</html>
