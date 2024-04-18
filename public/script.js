@@ -89,7 +89,7 @@ function displayFlights(result) {
 
 // Function to fetch data from the API based on the input value
 async function getData(inputValue) {
-    const apiKey = '2FSxEtvVUdM+1pKoefj4DQ==XB8YMOhfX6s1XpIn';
+    const apiKey = 'zsfoyjH2KTPpfLMOJkLG7w==Bp5Cts1W2c8fOaLo';
     const response = await fetch(`https://api.api-ninjas.com/v1/city?name=${inputValue}`, {
         headers: {
             'x-api-key': apiKey
