@@ -76,7 +76,7 @@
                     <option value="first">First Class</option>
                 </select><br><br>
 
-                <button type="button" onclick="getFlights()">Search</button>
+                <button type="button" onclick="showFlights()">Search</button>
             </form>
         </section>
 
@@ -89,11 +89,9 @@
                   <th>Flight</th>
                   <th>Departure Date (yyyy-mm-dd)</th>
                   <th>Flight Duration in Minutes</th>
+                  <th>Flight Number</th>
                   <th>Total Price <br>
-                    <select id="sort_byPrice">
-                      <option>Cheap to Expensive</option>
-                      <option>Expensive to Cheap</option>
-                    </select>
+                    <button onclick="sortByPrice()">Sort By Price</button>
                   </th>
                 </thead>
                 <tbody id="flight-rows">

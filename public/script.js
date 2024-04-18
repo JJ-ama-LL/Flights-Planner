@@ -7,6 +7,8 @@ const options = {
   }
 };
 
+let state = [];
+
 // Function to fetch flight data
 async function getFlights() {
     // Get input values
@@ -44,12 +46,29 @@ async function getFlights() {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
-        displayFlights(result);
+        return result;
     } catch (e) {
         console.log(e);
     }
 }
+
+
+async function showFlights() {
+    state = await getFlights();
+    displayFlights(state);
+}
+
+
+function priceCompare(a,b) {
+    return a.price.raw.localeCompare(b.price.raw);
+}
+
+
+function sortByPrice() {
+    let result = state.data.itineraries.sort(priceCompare);
+    displayFlights(result);
+}
+
 
 // Function to display flight data
 function displayFlights(result) {
@@ -66,6 +85,9 @@ function displayFlights(result) {
           <td>DEPARTURE: ${location.origin.city}, ${location.origin.country} ---> ${location.destination.city}, ${location.destination.country}</td>
           <td>${location.departure}</td>
           <td>${location.durationInMinutes}</td>
+          <td><a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
+          target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
+          </td>
           <td rowspan="2">${flight.price.formatted}</td>
           </tr>`;
 
@@ -76,6 +98,9 @@ function displayFlights(result) {
             <td>RETURN: ${location.origin.city}, ${location.origin.country} ---> ${location.destination.city}, ${location.destination.country}</td>
             <td>${location.departure}</td>
             <td>${location.durationInMinutes}</td>
+            <td><a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
+            target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
+            </td>
             </tr>`;
         }
       }
