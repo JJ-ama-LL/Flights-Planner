@@ -24,6 +24,10 @@
 .autocomplete-dropdown div:hover {
     background-color: #f2f2f2;
 }
+
+#logoutBtn{
+  margin-left: 700px;
+}
     </style>
 </head>
 <body>
@@ -36,8 +40,10 @@
                 <li><a href="hotels.html">Hotels</a></li>
                 <li><a href="restaurants.html">Restaurants</a></li>
                 <li><a href="attractions.html">Landmarks</a></li>
+                <li id="logoutBtn"><button>Logout</button></li>
+                <li id="loginBtn"><button>Login</button></li>
             </ul>
-                 </nav>
+        </nav> 
     </header>
 
     <main>
@@ -115,7 +121,72 @@
     </footer>
 
 
+    <script>
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+      import { 
+        getAuth, 
+        signOut, 
+        signInAnonymously, 
+        setPersistence, 
+        browserLocalPersistence, 
+        onAuthStateChanged 
+      } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+      import firebaseConfig from "./firebaseConfig.js";
+
+      const app = initializeApp(firebaseConfig);
+
+      const auth = getAuth();
+
+      function setAuthListeners(onLogin, onLogout){
+        onAuthStateChanged(auth, user => {
+        if (user) {
+          onLogin();
+        } else {
+          onLogout();
+          }
+        });
+      }
+
+      async function signIn(){
+        try{
+          await setPersistence(auth, browserLocalPersistence);
+          const user = await signInAnonymously(auth);
+        }catch(e){
+          console.error(e);
+        }
+      }
+
+      async function logout() {
+        try {
+          await signOut(auth);
+        } catch (error) {
+          console.error('Error signing out', error);
+        }
+      }
+
+      let loginBtn = document.querySelector('#loginBtn');
+      let logoutBtn = document.querySelector('#logoutBtn');
+
+      function setLoggedInUI(){
+          M.toast({html: 'Logged In!'})
+          document.querySelector('#loginBtn').style.display = 'none';
+          document.querySelector('#logoutBtn').style.display = 'inline-block';
+      }
+
+      function setLoggedOutUI(){
+          M.toast({html: 'Logged Out!'})
+          document.querySelector('#loginBtn').style.display = 'inline-block';
+          document.querySelector('#logoutBtn').style.display = 'none';
+      }
+
+      logoutBtn.addEventListener('click', logout);
+      loginBtn.addEventListener('click', signIn);
+      setAuthListeners(setLoggedInUI, setLoggedOutUI);
+  
+    </script>
+
     <script src="script.js"></script>
+
     <script>
 
         function setDefaultDepartureDate() {

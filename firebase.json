@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "info-1601---travel-hub-7b021",
     "public": "public",
     "ignore": [
       "firebase.json",
