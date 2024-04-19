@@ -60,12 +60,12 @@ async function showFlights() {
 
 
 function priceCompare(a,b) {
-    return a.price.raw.localeCompare(b.price.raw);
+    return a.data.itineraries[a].price.formatted.localeCompare(b.a.data.itineraries[b].price.formatted);
 }
 
 
 function sortByPrice() {
-    let result = state.data.itineraries.sort(priceCompare);
+    let result = state.sort(priceCompare);
     displayFlights(result);
 }
 
