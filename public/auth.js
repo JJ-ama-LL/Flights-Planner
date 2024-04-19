@@ -1,19 +1,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { 
-  getAuth, 
-  signOut, 
-  signInAnonymously, 
-  setPersistence, 
-  browserLocalPersistence, 
-  onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+import { getAuth, signInAnonymously, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import firebaseConfig from "./firebaseConfig.js";
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); 
+
+const auth = getAuth(app);
 
 function setAuthListeners(onLogin, onLogout) {
-  onAuthStateChanged(auth, user => {
+  onAuthStateChanged(auth, (user) => {
     if (user) {
       onLogin(user);
     } else {
@@ -25,11 +19,9 @@ function setAuthListeners(onLogin, onLogout) {
 async function signIn() {
   try {
     await setPersistence(auth, browserLocalPersistence);
-    const userCredential = await signInAnonymously(auth);
-    return userCredential.user;
+    await signInAnonymously(auth);
   } catch (error) {
-    console.error('Error signing in :', error.message);
-    throw error; 
+    console.error('Error signing in:', error);
   }
 }
 
@@ -37,9 +29,23 @@ async function logout() {
   try {
     await signOut(auth);
   } catch (error) {
-    console.error('Error signing out:', error.message);
-    throw error; 
+    console.error('Error signing out:', error);
   }
 }
 
-export { auth, setAuthListeners, signIn, logout };
+function setLoggedInUI(user) {
+  M.toast({ html: 'Logged In!' });
+  document.querySelector('#loginBtn').style.display = 'none';
+  document.querySelector('#logoutBtn').style.display = 'inline-block';
+}
+
+function setLoggedOutUI() {
+  M.toast({ html: 'Logged Out!' });
+  document.querySelector('#loginBtn').style.display = 'inline-block';
+  document.querySelector('#logoutBtn').style.display = 'none';
+}
+
+document.querySelector('#loginBtn').addEventListener('click', signIn);
+document.querySelector('#logoutBtn').addEventListener('click', logout);
+
+setAuthListeners(setLoggedInUI, setLoggedOutUI);
