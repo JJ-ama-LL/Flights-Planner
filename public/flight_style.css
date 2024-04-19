@@ -186,9 +186,11 @@ main form {
   width: 1120px;
   height: 180px;
   border-radius: 14px;
-  background: #3562BD;
-  padding : 20px;
+  background: rgba(255, 255, 255, 0.9); 
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
 }
+
 
 
 
