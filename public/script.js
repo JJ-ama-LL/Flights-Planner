@@ -82,12 +82,12 @@ function displayFlights(result) {
       for(let location of flight.legs) {
         if(i===1) {
           html += `<tr id="indv_flight">
+          <td>${location.carriers.marketing["0"].name} <a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
+          target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
+          </td>
           <td>DEPARTURE: ${location.origin.city}, ${location.origin.country} ---> ${location.destination.city}, ${location.destination.country}</td>
           <td>${location.departure}</td>
           <td>${location.durationInMinutes}</td>
-          <td><a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
-          target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
-          </td>
           <td rowspan="2">${flight.price.formatted}</td>
           </tr>`;
 
@@ -95,12 +95,12 @@ function displayFlights(result) {
         }
         else if(i===2){
           html += `<tr id="indv_flight">
+          <td>${location.carriers.marketing["0"].name} <a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
+            target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
+            </td>
             <td>RETURN: ${location.origin.city}, ${location.origin.country} ---> ${location.destination.city}, ${location.destination.country}</td>
             <td>${location.departure}</td>
             <td>${location.durationInMinutes}</td>
-            <td><a href="https://www.google.com/search?&q=${location.segments["0"].marketingCarrier.alternateId}+${location.segments["0"].flightNumber}&ie=UTF-8&oe=UTF-8"
-            target="_blank" class="button">${location.segments["0"].marketingCarrier.alternateId} ${location.segments["0"].flightNumber}</a>
-            </td>
             </tr>`;
         }
       }
