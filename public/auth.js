@@ -9,27 +9,27 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import firebaseConfig from "./firebaseConfig.js";
 
-
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); 
 
-const auth = getAuth();
-
-function setAuthListeners(onLogin, onLogout){
+function setAuthListeners(onLogin, onLogout) {
   onAuthStateChanged(auth, user => {
     if (user) {
-      onLogin();
+      onLogin(user);
     } else {
       onLogout();
     }
   });
 }
 
-async function signIn(){
-  try{
+async function signIn() {
+  try {
     await setPersistence(auth, browserLocalPersistence);
-    const user = await signInAnonymously(auth);
-  }catch(e){
-    console.error(e);
+    const userCredential = await signInAnonymously(auth);
+    return userCredential.user;
+  } catch (error) {
+    console.error('Error signing in :', error.message);
+    throw error; 
   }
 }
 
@@ -37,8 +37,9 @@ async function logout() {
   try {
     await signOut(auth);
   } catch (error) {
-    console.error('Error signing out', error);
+    console.error('Error signing out:', error.message);
+    throw error; 
   }
 }
 
-export {auth, setAuthListeners, signIn, logout};
+export { auth, setAuthListeners, signIn, logout };
