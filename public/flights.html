@@ -128,9 +128,9 @@
     </footer>
 
 
-    <script type="module">
+ <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import { getAuth, signInAnonymously, setPersistence, browserLocalPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+import { getAuth, signInAnonymously, setPersistence, browserLocalPersistence, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import firebaseConfig from "./firebaseConfig.js";
 
 const app = initializeApp(firebaseConfig);
@@ -180,8 +180,8 @@ document.querySelector('#loginBtn').addEventListener('click', signIn);
 document.querySelector('#logoutBtn').addEventListener('click', logout);
 
 setAuthListeners(setLoggedInUI, setLoggedOutUI);
-setLoggedInUI(user);
-setLoggedOutUI(); 
+
+setLoggedInUI();
 
     </script>
     
