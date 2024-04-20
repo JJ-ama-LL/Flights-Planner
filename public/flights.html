@@ -193,7 +193,7 @@ setLoggedInUI();
           const today = new Date();
           const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
           const year = tomorrow.getFullYear();
-          let month = tomorrow.getMonth() + 1; // January is 0!
+          let month = tomorrow.getMonth() + 1;
           let day = tomorrow.getDate();
         
           if (month < 10) {
