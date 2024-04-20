@@ -30,6 +30,10 @@
   display: none
 }
 
+#loginBtn {
+    display: inline-block;
+}
+
 
     </style>
 </head>
@@ -176,6 +180,9 @@ document.querySelector('#loginBtn').addEventListener('click', signIn);
 document.querySelector('#logoutBtn').addEventListener('click', logout);
 
 setAuthListeners(setLoggedInUI, setLoggedOutUI);
+setLoggedInUI(user);
+setLoggedOutUI(); 
+
     </script>
     
     <script src="script.js"></script>
