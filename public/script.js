@@ -2,7 +2,7 @@
 const options = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': 'e5c9d7df88msh634cb533ef563bfp159718jsn0b474dbdbd67',
+    'X-RapidAPI-Key': '9e32b1e0c6msh70546f53ac062a2p1a8a3bjsnf8044ad38274',
     'X-RapidAPI-Host': 'sky-scanner3.p.rapidapi.com'
   }
 };
@@ -114,7 +114,7 @@ function displayFlights(result) {
 
 // Function to fetch data from the API based on the input value
 async function getData(inputValue) {
-    const apiKey = 'zsfoyjH2KTPpfLMOJkLG7w==Bp5Cts1W2c8fOaLo';
+    const apiKey = 'vORkFva6Z4BA7hEY5D2iEQ==bNVudf5B6M24kZmZ';
     const response = await fetch(`https://api.api-ninjas.com/v1/city?name=${inputValue}`, {
         headers: {
             'x-api-key': apiKey
